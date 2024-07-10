@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static '/style.css' %}">    
+</head>
+<body>
+    <div class="sticky-bar">
+        <div class="box">
+            <p class="logo">logo</p>
+            <p class="cart" style="margin-left: 50%;">add cart</p>
+        </div>
+    </div>
+    <div style="background-color: cornsilk; width: 600px; height: 300px; margin: 30%; margin-top: 10%; text-align: center; padding: 40px;">
+        <h2 id="sco">Your score</h2>
+        <div style="width: 500px;">    
+            <h3 id="cor" style="float: left; margin-right: 30px;">no of correct</h3>
+            <h3 id="incor" style=" margin-left: 30px;">no of incorrect</h3>
+            <h3 id="perc" style="float: left; margin-right: 30px;">percentage</h3>
+            <h3 id="nof" style="margin-left: 30px;">no of student attempted</h3>
+        </div>
+    </div>    
+</body>
+<script>
+    givenans=[]
+    correct=0
+    wrong=0
+    score=0
+    const storedJsonString = localStorage.getItem('g_answer');
+    const givnans = JSON.parse(storedJsonString);
+    for (const key in givnans) {
+    const value = givnans[key];
+    givenans.push(value)
+    console.log(`Key: ${key}, Value: ${value}`);
+}
+    const storedArrayString = localStorage.getItem("answer");
+    const ans = JSON.parse(storedArrayString);    
+    //let ans = localStorage.getItem("answer");
+    console.log(typeof(ans))
+    for(i=0;i<givenans.length; i++){
+        an=ans[i]
+        gi=givenans[i]
+        console.log(an,gi)
+        if (an==gi && gi!='undefined'){
+            correct=correct+1
+            score=score+4
+        }else{
+            score=score-1
+            wrong=wrong+1
+        }
+    }
+
+document.getElementById("sco").innerHTML="Your Score: "+score
+document.getElementById("cor").innerHTML="no of correct: "+correct
+document.getElementById("incor").innerHTML="no of incorrect: "+wrong
+</script>
+</html>

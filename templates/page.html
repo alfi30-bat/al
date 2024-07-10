@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static '/style.css' %}">
+    <title>Document</title>
+
+</head>
+<body style="height: 100%; background-color:rgba(249, 250, 251);">
+    <div class="sticky-bar">
+        <div class="box">
+            <p class="logo">logo</p>
+            <p class="cart" style="margin-left: 50%;">add cart</p>
+        </div>
+    </div>
+
+    <div style="display: inline-block;">ugyiihuhiuhih</div>
+    <div style=" background-color: rgb(219, 202, 202); width: 70%; color: rgb(33, 46, 58); display: inline-block;">
+        <p>dintro seo</p>
+        <p>book advertisment</p>
+        <div>
+            <h2 id="trigger-element">chater contents</h2>
+            <p id="content" style="display: none;">gergerergegeg</p>
+            <h3>heat and temperature </h3>
+            <h3>temperture and states of matter</h3>
+            <h3>thermometry</h3>
+            <h3>thermal equlibrium</h3>
+            <h3>thermal expansion</h3>
+            <h3>calorimatory</h3>
+        </div>
+    </div>
+    <div id="popup" style="display: none;margin-left: 10%;">
+        <p style="display: none;">{{ti}}</p>
+        <a href="{% url 'page' %}"><button onclick="extractq()" >execute</button></a>
+    </div>
+
+  
+</body>
+<script>
+  document.getElementById("trigger-element").addEventListener("click", function() {
+    document.getElementById("popup").style.display = "inline-block";
+    document.getElementById("content").style.display = "block";
+  });
+ function extractq(){
+    alert("fetching questions")
+    console.log(document.getElementById("test").innerHTML);
+    diction=document.getElementById("test").innerHTML;
+    diction=diction.split("', '");
+    console.log(diction[3]);
+    localStorage.setItem("diction", diction);
+}
+
+</script>
+</html>

@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+<link rel="stylesheet" href="{% static '/style.css' %}">
+
+</head>
+<body>
+    {% load static %}
+    <div id="main">
+        <div>
+            <label style=" font-size: 170%;">section</label>
+            {% load static %}
+            <img href="{% static '/attempted.png' %}" title="alfref" >
+            <label id="timer" style=" margin-left: 70%; font-size: 170%; ">time</label>
+            <label class="openbtn" style=" margin-left: 10%;" onclick="openNav()">☰ </label>  
+            <hr style="margin-bottom: 0px;">
+        </div>
+        <div>
+            <p style="border: 2px; background-color: aqua; width: 50px; margin: 0px; font-size: 180%; padding-left: 1%;">  catorgory</p>
+            <hr style="margin: 0;">
+        </div>
+        <div>
+            <label style=" color: orangered; font-size: 160%; margin-top: 0.5%;">Question Type = MCQ</label>
+            <label style="margin-left: 70%;">Marks</label>
+            <label style="color: green">+4</label>
+            <label> | Negative Marks</label>
+            <label style="color: orangered;">-1</label>
+            <hr style="color: rgb(97, 95, 95);">
+        </div>
+        <div>
+            <label style="font-size: 170% ; font-weight: bold;">question no</label>
+            <label id="qno" style="font-size: 170% ; font-weight: bold;">1</label>
+            <hr style="color: rgb(97, 95, 95); margin-bottom: 0.5%;">
+        </div>
+        <div style="margin-bottom: 300px;">
+            <h4 style="display: none;" id="test">{{ti}}</h4>
+            <h4 id="question"></h4>
+            <ul class="choices">
+                <li>
+                    <label><input id="radio1" type="radio" name="question0" value="A"><span id="text1">2</span></label>
+                </li>
+                <li>
+                    <label><input id="radio2" type="radio" name="question0" value="B"><span id="text2">1</span></label>
+                </li>
+                <li>
+                    <label><input id="radio3" type="radio" name="question0" value="C"><span id="text3">3</span></label>
+                </li>
+                <li>
+                    <label><input id="radio4" type="radio" name="question0" value="D"><span id="text4">4</span></label>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <hr style="margin-bottom: 5%;">
+
+            <hr>
+            <button style="float: left; margin-left: 2%; height: 55px; font-size: 15px; padding: 1%;" type="button" onclick="mfr()">mark review and next</button>
+            <button style="float: left; margin-left: 2%; height: 55px; font-size: 15px; padding: 1%;" type="button" onclick="clearr()">clear response</button>
+            <button style="margin-left: 2%; height: 55px; font-size: 15px; padding: 1%;" onclick="next()">save next</button>
+        </div>
+    </div>
+    <div>
+        <div id="mySidebar" class="sidebar">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+            <h2 style="background-color: green; color: aliceblue; margin-bottom: 30%;">profile</h2>
+            <div > 
+                <ul style="margin: 10px; display: flex;flex-wrap: wrap;">
+                    <li class="topbox">
+                        <span class="stateboxbg" style="background: url(/static/attempted.png) no-repeat scroll 0 0 rgba(0, 0, 0, 0); background-position: -39px -50px;"></span>
+                        <span>answered</span>
+                    </li>
+                    <li class="topbox">
+                        <span class="stateboxbg" style="background: url(/static/attempted.png) no-repeat scroll 0 0 rgba(0, 0, 0, 0);background-position: -7px -52px "></span>
+                        <span>not answered</span>
+                    </li>
+                    <li class="topbox">
+                        <span class="stateboxbg" style="background: url(/static/attempted.png) no-repeat scroll 0 0 rgba(0, 0, 0, 0); background-position: -74px -50px;"></span>
+                        <span>marked for review</span>
+                    </li>
+                    <li class="topbox">
+                        <span class="stateboxbg" style="background: url(/static/attempted.png) no-repeat scroll 0 0 rgba(0, 0, 0, 0); background-position: -106px -50px;"></span>
+                        <span>default</span>
+                    </li>
+                    <li class="topbox">
+                        <span class="stateboxbg" style="background: url(/static/attempted.png) no-repeat scroll 0 0 rgba(0, 0, 0, 0); background-position: -170px -50px;"></span>
+                        <span>answered marked for review</span>
+                    </li>                                        
+                </ul>
+                
+            </div>
+            <ul id="sidebgs">
+
+            </ul>
+            <a href="{% url 'anspage' %}"><button type="submit" id="sub" onclick="send()" >submit</button></a>
+        </div>
+    </div>
+</body>
+<script>
+function send(){
+    const arrayString = JSON.stringify(answer);           
+    localStorage.setItem("answer", arrayString);      
+    const jsonString = JSON.stringify(g_answer);              
+    localStorage.setItem("g_answer", jsonString);   
+}
+const d = new Date();
+const dd = String(d.getDate()).padStart(2); // Day
+const yyyy = d.getFullYear(); // Year
+const monthNames = [
+  "January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+]
+const nameOfMonth = monthNames[d.getMonth()]; // Example output: "July"
+console.log(nameOfMonth);
+const hours = d.getHours();
+const minute = d.getMinutes();
+const second = d.getSeconds() + 10;
+       // Set the date we're counting down to (adjust this date as needed)
+        var countDownDate = new Date(nameOfMonth+" "+dd+", "+yyyy+" "+ hours+":"+minute+":"+second).getTime();
+
+        // Update the count down every 1 second
+        var x = setInterval(function() {
+            var now = new Date().getTime();
+            var distance = countDownDate - now;
+
+            var minutes = Math.floor(distance / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Display the remaining time
+            document.getElementById("timer").innerHTML = minutes + "m " + seconds + "s";
+
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("timer").innerHTML = "EXPIRED";   
+                send()             
+                document.getElementById("sub").click()
+            }
+        }, 1000);
+
+ function creat_dict(){
+        for (let i = 0; ; i=i+6) {
+            questions.push(diction[i]);
+            if (i>=diction.length) {
+             questions.splice(-1);
+            break;}
+        }
+        for (let i = 1; ; i=i+6) {
+            options.push(diction[i], diction[i+1], diction[i+2], diction[i+3]);
+            if (i>=diction.length && i!==diction.length) {
+             options.splice(-1)
+             options.splice(-1)
+             options.splice(-1)
+             options.splice(-1)
+            break;}
+        }        
+        for (let i = 5; ; i=i+6) {
+            answer.push(diction[i]);
+            if (i>=diction.length){
+                answer.splice(-1);               
+                break;}
+    // Code to execute
+        }        
+        console.log(questions);
+        console.log(options);
+        console.log(answer);
+    }
+    
+    diction=document.getElementById("test").innerHTML;
+    diction=diction.split("', '");
+    console.log(diction)
+
+    
+    var nummber= diction.length  
+    nummber=nummber-(nummber-1);      
+    console.log(nummber+"alberto");
+    /*document.getElementById('imagebox').src = `${pat}`;*/
+    var questions=[];
+    var answer=[];
+    var g_answer={}
+    var options=[];
+    var temp_ans={}
+    creat_dict()
+    document.getElementById("question").innerHTML=questions[nummber-1]
+nam=1
+function make_sidebtx(){
+    for (j=1;j<questions.length+1 ;j++, nam=nam+4){
+        console.log(nam)
+        var newElement = document.createElement("li");
+        newElement.className="tagged"
+        newElement.id="li"
+        newElement.style="display: inline-block;"
+        document.getElementById("sidebgs").appendChild(newElement); 
+        var newElement = document.createElement("button");
+        newElement.className="statebg"
+        newElement.type="button"
+        newElement.value=nam
+        newElement.innerHTML = j ;
+        newElement.onclick=function() {sidebutons(this.value, this.innerHTML)}
+        newElement.style="background: url(/static/attempted.png) no-repeat scroll 0 0 rgba(0, 0, 0, 0); background-position: -156px -4px;"
+        document.getElementById("li").appendChild(newElement);         
+    }}
+
+make_sidebtx()  
+
+    function checkRadioButtons(num) {
+    for (i = 1; ; i++, num++) {
+        radioButton = document.getElementById("radio" + i);
+        if(radioButton?.value==null){
+            return num
+        }else{
+        radioButton.value=options[num-1]
+        radiotext = document.getElementById("text" + i);
+        radiotext.innerHTML=options[num-1]
+        //console.log(radioButton)
+        //console.log(options[num-1])
+         // Exit the loop when no more radio buttons are found
+        }
+    }
+ }    
+
+ checkRadioButtons(nummber)
+
+ console.log(num+"RTYHRTYHRTHRT")
+
+
+function openNav() {
+  document.getElementById("mySidebar").style.width = "170px";
+  document.getElementById("main").style.marginRight = "170px";
+}
+
+/* Set the width of the sidebar to 0 and the left margin of the page content to 0 */
+function closeNav() {
+  document.getElementById("mySidebar").style.width = "0";
+  document.getElementById("main").style.marginRight = "0";
+}
+
+
+
+function clearr(){
+    console.log("clear")
+    var ele = document.getElementsByName("question0");
+    for(var i=0;i<ele.length;i++)
+        ele[i].checked = false;
+}
+function addqno(v){
+    var x=document.querySelector('button[value='+ CSS.escape(v) + ']');
+        console.log(v)
+        console.log(x)
+        qnoo=x.innerHTML
+        qnoo= Number(qnoo)
+        document.getElementById("qno").innerHTML=qnoo
+}
+
+function next(){
+
+    if ( document.querySelector('input[type="radio"]:checked')?.value == null ){
+        nummber= nummber +4
+        document.querySelector('button[value='+ CSS.escape(nummber-4) + ']').style.backgroundPosition = "-56px -4px";
+        temp_ans[nummber-4]=4        
+        document.querySelector('button[value='+ CSS.escape(nummber) + ']').click();
+        console.log(nummber+"alfredo")
+        console.log(temp_ans[nummber-4]+"jesion")
+        console.log(Object.values(g_answer)+"jenson"+Object.values(temp_ans) )
+
+    }else{
+        nummber= nummber +4;
+        document.querySelector('button[value='+ CSS.escape(nummber-4) + ']').style.backgroundPosition = "-4px -4px";
+        sleanswer=document.querySelector('input[type="radio"]:checked').value        
+        g_answer[nummber-4]=sleanswer
+        const radioButtons = document.querySelectorAll('input[name="question0"]');
+        radioButtons.forEach((radioButton, index) => {
+            if (radioButton.checked) {
+                console.log(`Selected value for radio button ${index}: ${radioButton.value}`);
+                temp_ans[nummber-4]=index
+            }
+        });
+        document.querySelector('button[value='+ CSS.escape(nummber) + ']').click();
+        console.log(radioButtons, sleanswer)
+        console.log(g_answer+"hrthrhralfreddfd")
+        clearr()    
+        console.log(Object.values(g_answer)+"jenson"+Object.values(temp_ans) )
+    }
+}
+
+function mfr(){
+    if ( document.querySelector('input[type="radio"]:checked')?.value == null ){
+        nummber= nummber +4 ;    
+         console.log("null");
+         document.querySelector('button[value='+ CSS.escape(nummber-4) + ']').style.backgroundPosition = "-107px -2px";
+         temp_ans[nummber-4]=4
+         document.querySelector('button[value='+ CSS.escape(nummber) + ']').click();
+         console.log(Object.values(g_answer)+"jenson"+Object.values(temp_ans) )
+    }else{
+        console.log("value");
+        nummber= nummber +4;
+        console.log("value"+nummber);
+        document.querySelector('button[value='+ CSS.escape(nummber-4) + ']').style.backgroundPosition = "-65px -179px";
+        console.log("pick up answer");
+        sleanswer=document.querySelector('input[type="radio"]:checked').value;
+        g_answer[nummber-4]=sleanswer
+        const radioButtons = document.querySelectorAll('input[name="question0"]');
+        radioButtons.forEach((radioButton, index) => {
+            if (radioButton.checked) {
+                console.log(`Selected value for radio button ${index}: ${radioButton.value}`);
+                temp_ans[nummber-4]=index
+            }
+        });        
+        document.querySelector('button[value='+ CSS.escape(nummber) + ']').click();
+        clearr()
+        console.log(Object.values(g_answer)+"jenson"+Object.values(temp_ans) )
+    }
+}
+
+function sidebutons(value, htmll){
+    nummber=Number(value)
+    console.log(value +"gyuigigftifggfykgigtitityalf4refi");
+    document.getElementById("question").innerHTML=questions[htmll-1];
+    checkRadioButtons(value);
+    console.log(htmll);
+    addqno(value);
+    clearr()
+    if (document.querySelector('button[value='+ CSS.escape(nummber) + ']').style.backgroundPosition == "-4px -4px" || document.querySelector('button[value='+ CSS.escape(nummber) + ']').style.backgroundPosition == "-65px -179px" ){
+        inde=temp_ans[Number(nummber)]
+        console.log(inde, nummber, temp_ans)
+        const radioButtons = document.querySelectorAll('input[name="question0"]');
+        radioButtons[inde].checked = true;        
+    }
+//do dictionary orelese this repeted values
+
+}
+
+
+</script>
+</html>
