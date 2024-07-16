@@ -42,7 +42,16 @@ li::marker {
   color: white; /* Change to your desired color */
   
 }
-
+.gr {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 100px);
+  gap: 10px;
+  grid-template-areas:
+      "header header header"
+      "sidebar content content"
+      "footer footer footer";
+}
 
 
 
