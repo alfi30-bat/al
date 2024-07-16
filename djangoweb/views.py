@@ -5,6 +5,7 @@ import random
 from django.shortcuts import render
 def button(request):
     return render(request, 'page.html')
+   
 
 def exampage(request):
     conn = sqlite3.connect('questions database.db')
