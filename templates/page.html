@@ -9,21 +9,24 @@
     <title>Document</title>
 
 </head>
+
 <body style="height: 100%; background-color:rgba(249, 250, 251);">
+    {% load static %}
+
     <div class="sticky-bar">
         <div class="box">
             <p class="logo">logo</p>
             <p class="cart" style="margin-left: 50%;">add cart</p>
         </div>
     </div>
-
-    <div style="display: inline-block;">ugyiihuhiuhih</div>
-    <div style=" background-color: rgb(219, 202, 202); width: 70%; color: rgb(33, 46, 58); display: inline-block;">
+   <div class="gr" style="  display: grid;grid-template-columns: repeat(3, 1fr);grid-template-rows: repeat(3, 100px);gap: 10px;grid-template-areas:'sidebar1 content sidebar2';">
+    <div style="grid-area: sidebar1;z-index: 2;">ugyiihuhiuhih</div>
+    <div style=" background-color: rgb(219, 202, 202); width: 700px; color: rgb(33, 46, 58);grid-area: content;">
         <p>dintro seo</p>
         <p>book advertisment</p>
         <div>
-            <h2 id="trigger-element">chater contents</h2>
-            <p id="content" style="display: none;">gergerergegeg</p>
+            <div id="contentdiv" style="grid-area: sidebar2;" >    </div>
+            <h2 id="trigger-element" >chater contents</h2>
             <h3>heat and temperature </h3>
             <h3>temperture and states of matter</h3>
             <h3>thermometry</h3>
@@ -34,16 +37,50 @@
     </div>
     <div id="popup" style="display: none;margin-left: 10%;">
         <p style="display: none;">{{ti}}</p>
-        <a href="{% url 'page' %}"><button onclick="extractq()" >execute</button></a>
+        <a style="position: absolute; top: 200px; left:1020px; " href="{% url 'page' %}">
+            <button style="height: 50px;border-radius: 10px; border-width: thick; border-color: darkcyan; color: darkcyan; font-size: 20px; " onclick="extractq()" >{{qs}}check out these questions</button>
+        </a>
     </div>
-
+</div>
   
 </body>
 <script>
+  nu=1
+  po=200
+  i=1
+  k=-1
   document.getElementById("trigger-element").addEventListener("click", function() {
     document.getElementById("popup").style.display = "inline-block";
-    document.getElementById("content").style.display = "block";
+    var newElement = document.createElement("span");
+    newElement.id= "content";
+    newElement.style="display: block;background: url(/static/heat"+ CSS.escape(nu) +".png) no-repeat scroll 0 0 rgba(0, 0, 0, 0);height:875px; width: 700px;"
+    document.getElementById("contentdiv").appendChild(newElement);
+    const quest = ["check out these questions", "lost motive!! try these", "bulid confidence with these questions", "feel like you can't click me", "Wanan test yourself", "push betond time limits", "July"];
+    for( j=1; j<4 ; j++, i++, po=po+200){
+        randomIndex = Math.floor(Math.random() * quest.length);
+        ranquest = quest[randomIndex];
+        if(randomIndex==k){
+             console.log("alfred")
+             randomIndex = Math.floor(Math.random() * quest.length);
+             ranquest = quest[randomIndex];
+        }
+        k=randomIndex
+        var newElement = document.createElement("a");
+        newElement.href="{% url 'page' %}"
+        newElement.id="link"+i
+        newElement.style="position: relative; top:"+ po +"px;"
+        document.getElementById("popup").appendChild(newElement);
+        var newElement = document.createElement("button");
+        newElement.style="height: 50px;border-radius: 10px; border-width: thick; border-color: darkcyan; color: darkcyan; font-size: 20px; ";
+        newElement.onclick=function() {extractq()};
+        newElement.innerHTML=ranquest;
+        document.getElementById("link"+i).appendChild(newElement);
+    }
+    nu=nu+1; 
+    console.log(po)
   });
+  document.getElementById("trigger-element").click()
+
  function extractq(){
     alert("fetching questions")
     console.log(document.getElementById("test").innerHTML);
