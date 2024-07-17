@@ -24,6 +24,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.button),    
     path("youtubedownloader", views.exampage, name = "page"),
-    path("youtubedownlofrader", views.answerpage, name = "anspage")
+    path("youtubedownlofrader", views.answerpage, name = "anspage"),
+    path("youtubedlofrader", views.login, name = "LOGIN"),
+    path("youtubedlader", views.logn, name = "LOGN"),
+    path("youtubedownader", views.signin, name = "SIGNIN")
 
 ]
