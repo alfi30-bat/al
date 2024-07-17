@@ -1,0 +1,189 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        /* Bordered form */
+        form {
+            border: 3px solid #f1f1f1;
+        }
+        .lmain{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Full-width inputs */
+        input {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            font-size: 30px;
+            margin: 10px;
+            padding: 10px;
+        }
+        .btn-group .btx {
+            color: black;
+            border: none;
+            background-color: antiquewhite;
+            width: 200px;
+            height: 50px;
+            margin-bottom: 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 25px;
+            cursor: pointer;
+            border-right: none; /* Prevent double borders */
+            border-top:none;
+            border-bottom:none;
+            }
+
+        .btn-group .btx:hover {
+            border-bottom: black 5px solid
+            }
+        /* Set a style for all buttons */
+        #fo{
+            display: grid;
+            margin: 10px;
+            font-size: 30px;
+            padding: 30px;
+        }        
+        .button {
+            background-color: #04AA6D;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            font-size: 20px;
+        }
+
+        /* Add a hover effect for buttons */
+        .button:hover {
+            opacity: 0.8;
+        }
+
+        /* Add padding to containers */
+        .container {
+            padding: 16px;
+            width: 410px;
+        }
+
+        /* The "Forgot password" text */
+        span.psw {
+            float: right;
+            padding-top: 16px;
+        }
+
+        /* Change styles for span and cancel button on extra small screens */
+        @media screen and (max-width: 300px) {
+            span.psw {
+                display: block;
+                float: none;
+            }
+            .cancelbtn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="lmain">
+
+    <div class="container">
+        <form id="form" action = "{% url 'LOGIN' %}" method = GET>
+            <div class="btn-group">
+                <button type="button" class="btx" style="border-left:none;" onclick="dis()" >LOG IN</button>
+                <button type="button" class="btx" onclick="dis2()" >SIGN UP</button>
+            </div>
+            <div id="fo"></div>
+            <h2>{{info}}</h2>
+            <button class="button" type="submit">Log In</button>
+        </form>
+    </div>
+</div>
+    <footer>
+        <div class="copyright">
+            <p class="mag0"> © 2020 toolbox.co.in </p>
+        </div>
+    </footer>
+</body>
+<script>
+    dis()
+    function dis(){
+        document.getElementById("form").action="{% url 'LOGIN' %}"
+        document.getElementById("fo").innerHTML=""
+        var newElement = document.createElement("label");
+        newElement.innerHTML="Email Id"
+        document.getElementById("fo").appendChild(newElement);
+        var newElement = document.createElement("input");
+        newElement.type="email"
+        newElement.name="email"
+        newElement.placeholder="Email"
+
+        document.getElementById("fo").appendChild(newElement);
+        var newElement = document.createElement("label");
+        newElement.innerHTML="Password"
+        document.getElementById("fo").appendChild(newElement);
+        var newElement = document.createElement("input");
+        newElement.type="password"
+        newElement.name="pass"
+        newElement.placeholder="Enter Password"
+        document.getElementById("fo").appendChild(newElement);
+        document.querySelector('button[type="submit"').innerHTML="Log In"
+
+   }
+   function dis2(){
+        document.getElementById("form").action="{% url 'SIGNIN' %}"
+        document.getElementById("fo").innerHTML=""
+        var newElement = document.createElement("label");
+        newElement.innerHTML="Email Id"
+        document.getElementById("fo").appendChild(newElement);
+        var newElement = document.createElement("input");
+        newElement.type="email"
+        newElement.name="email"
+        newElement.placeholder="Email"
+        document.getElementById("fo").appendChild(newElement);
+
+        var newElement = document.createElement("label");
+        newElement.innerHTML="Username"
+        document.getElementById("fo").appendChild(newElement);
+        var newElement = document.createElement("input");
+        newElement.type="text"
+        newElement.name="username"
+        newElement.placeholder="Username"
+        document.getElementById("fo").appendChild(newElement);
+
+        var newElement = document.createElement("label");
+        newElement.innerHTML="year of enterance exam"
+        document.getElementById("fo").appendChild(newElement);
+        var newElement = document.createElement("input");
+        newElement.type="number"
+        newElement.name="number"
+        const d = new Date();
+        newElement.min=d.getFullYear();
+        newElement.value= d.getFullYear(); // Year
+        newElement.step=1;
+        newElement.max=d.getFullYear()+4;
+        document.getElementById("fo").appendChild(newElement);
+
+        var newElement = document.createElement("label");
+        newElement.innerHTML="Create Password"
+        document.getElementById("fo").appendChild(newElement);
+        var newElement = document.createElement("input");
+        newElement.type="password"
+        newElement.name="pass"
+        newElement.placeholder="Enter Password"
+        document.getElementById("fo").appendChild(newElement);
+
+        document.querySelector('button[type="submit"').innerHTML="Sign Up"
+   }   
+</script>
+</html>
+

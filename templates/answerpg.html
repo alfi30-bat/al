@@ -11,16 +11,18 @@
     <div class="sticky-bar">
         <div class="box">
             <p class="logo">logo</p>
-            <p class="cart" style="margin-left: 50%;">add cart</p>
+            <a href="{% url 'LOGN' %}"><p class="cart" style="margin-left: 50%;">Log In</p></a>
         </div>
     </div>
     <div style="background-color: cornsilk; width: 600px; height: 300px; margin: 30%; margin-top: 10%; text-align: center; padding: 40px;">
         <h2 id="sco">Your score</h2>
-        <div style="width: 500px;">    
-            <h3 id="cor" style="float: left; margin-right: 30px;">no of correct</h3>
-            <h3 id="incor" style=" margin-left: 30px;">no of incorrect</h3>
-            <h3 id="perc" style="float: left; margin-right: 30px;">percentage</h3>
-            <h3 id="nof" style="margin-left: 30px;">no of student attempted</h3>
+        <div style="width: 500px; display: grid;">    
+            <h3 id="cor" >no of correct</h3>
+            <h3 id="incor" >no of incorrect</h3>
+            <h3 id="perc" >percentage</h3>
+            <h3 id="nof" >no of student attempted</h3>
+            <h3 >go for another pentagon(5 questions)</h3>
+            <h3>check out this 10 questions</h3>
         </div>
     </div>    
 </body>
