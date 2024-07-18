@@ -1,6 +1,8 @@
 
 
-
+from IPython.display import display, Latex
+for i in range(3):
+    display(Latex(f'$x_{i}$'))
 
 
 import sqlite3

@@ -4,8 +4,11 @@ import random
 import os
 
 from django.shortcuts import render
+global file_count
+file_count=7
 def button(request):
-
+    global file_count
+  
     folder_path = './static/heat'
     file_count = len([name for name in os.listdir(folder_path) if os.path.isfile(os.path.join(folder_path, name))])
     print(f'The number of files in {folder_path} is {file_count}')
@@ -50,13 +53,19 @@ def signin(request):
     else:
         curosr.execute("insert into users (email, username, yearofexam, password) values (?, ?, ?, ?)",
         (mail, usename, year, passw))
-                    
+        sc=0
+        curosr.execute("create table if not exists scores (username, score)")
+        curosr.execute("insert into scores (username, score) values (?, ?)",
+        (usename, sc))
         conn.commit()
         conn.close() 
-   
-    return render(request, 'page.html')
+        global file_count
+
+        return render(request, 'page.html', {'max':file_count, 'name':usename} )
+        
 
 def login(request):
+    global file_count
     conn = sqlite3.connect('user.db')
     curosr = conn.cursor()    
     g=request.GET
@@ -73,7 +82,7 @@ def login(request):
 
     elif x[0]==passw :
         print("correct")
-        return render(request, 'page.html', {"name":x[1]})
+        return render(request, 'page.html', {"name":x[1], 'max':file_count})
     else:
         print("wrong")  
         return render(request, 'login.html', {'info':"wrong ID or password"})
