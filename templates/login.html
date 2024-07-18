@@ -93,11 +93,12 @@
         }
     </style>
 </head>
-<body>
+<body onload="noBack()" onpageshow="if (event.persisted) noBack();">
 <div class="lmain">
 
     <div class="container">
         <form id="form" action = "{% url 'LOGIN' %}" method = GET>
+            {% csrf_token %}
             <div class="btn-group">
                 <button type="button" class="btx" style="border-left:none;" onclick="dis()" >LOG IN</button>
                 <button type="button" class="btx" onclick="dis2()" >SIGN UP</button>
@@ -115,6 +116,10 @@
     </footer>
 </body>
 <script>
+    window.history.forward();
+    function noBack() {
+        window.history.forward();
+    }
     dis()
     function dis(){
         document.getElementById("form").action="{% url 'LOGIN' %}"

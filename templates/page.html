@@ -7,7 +7,8 @@
     {% load static %}
     <link rel="stylesheet" href="{% static '/style.css' %}">
     <title>Document</title>
-
+<style>
+</style>
 </head>
 
 <body style="height: 100%; background-color:rgba(249, 250, 251);">
@@ -42,9 +43,6 @@
     </div>
     <div id="popup" style="display: none;margin-left: 10%;">
         <p id="maxvalue" style="display: none;">{{max}}</p>
-        <a style="position: absolute; top: 200px; left:1020px; " href="{% url 'page' %}">
-            <button style="height: 50px;border-radius: 10px; border-width: thick; border-color: darkcyan; color: darkcyan; font-size: 20px; " onclick="extractq()" >{{qs}}check out these questions</button>
-        </a>
     </div>
 </div>
   
@@ -61,6 +59,10 @@
     if(nu<=document.getElementById("maxvalue").innerHTML){
         newElement.style="display: block;background: url(/static/heat/heat"+ CSS.escape(nu) +".png) no-repeat scroll 0 0 rgba(0, 0, 0, 0);height:875px; width: 700px;"
         document.getElementById("contentdiv").appendChild(newElement);
+        window.scrollBy({
+                top: 600, // Adjust this value to scroll more or less
+                behavior: 'smooth'
+            });
         const quest = ["check out these questions", "lost motive!! try these", "bulid confidence with these questions", "feel like you can't click me", "Wanan test yourself", "push betond time limits", "July"];
         for( j=1; j<4 ; j++, i++, po=po+250){
             randomIndex = Math.floor(Math.random() * quest.length);
@@ -74,8 +76,12 @@
             var newElement = document.createElement("a");
             newElement.href="{% url 'page' %}"
             newElement.id="link"+i
-            newElement.style="position: relative; top:"+ po +"px;"
+            newElement.style="position: relative; top:"+ po +"px;   animation-name: example"+i+"; animation-duration: 4s;";
             document.getElementById("popup").appendChild(newElement);
+            var style = document.createElement('style');
+            style.innerHTML = " @keyframes example"+i+" {0%   {background-color:red; left:200px; top:"+ po +"px;}100% {background-color:red; left:0px; top:"+ po +"px;}}"     
+            // Append the <style> element to the document head
+            document.head.appendChild(style);               
             var newElement = document.createElement("button");
             newElement.style="height: 50px;border-radius: 10px; border-width: thick; border-color: darkcyan; color: darkcyan; font-size: 20px; ";
             newElement.onclick=function() {extractq()};

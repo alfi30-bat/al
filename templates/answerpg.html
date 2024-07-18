@@ -4,29 +4,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
     {% load static %}
     <link rel="stylesheet" href="{% static '/style.css' %}">    
 </head>
-<body>
+<body onload="noBack()" onpageshow="if (event.persisted) noBack();">
     <div class="sticky-bar">
         <div class="box">
             <p class="logo">logo</p>
             <a href="{% url 'LOGN' %}"><p class="cart" style="margin-left: 50%;">Log In</p></a>
         </div>
     </div>
-    <div style="background-color: cornsilk; width: 600px; height: 300px; margin: 30%; margin-top: 10%; text-align: center; padding: 40px;">
+    <div style="background-color: cornsilk; width: 600px; height: 500px; margin: 30%; margin-top: 10%; text-align: center; padding: 40px;">
         <h2 id="sco">Your score</h2>
-        <div style="width: 500px; display: grid;">    
+        <div style="margin-top: 10%; margin-left: 5%; width: 500px; display: grid;   grid-template-columns: repeat(2, 1fr);grid-template-rows: repeat(2, 100px);">    
             <h3 id="cor" >no of correct</h3>
             <h3 id="incor" >no of incorrect</h3>
             <h3 id="perc" >percentage</h3>
             <h3 id="nof" >no of student attempted</h3>
+        </div>
+        <div>
             <h3 >go for another pentagon(5 questions)</h3>
             <h3>check out this 10 questions</h3>
+            <p>
+                 <a href="http://docs.mathjax.org/en/latest/basic/mathematics.html"></a>:
+                When \(a \ne 0\), there are two solutions to \(ax^2 + bx + c = 0\) and they are
+                $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$
+                \[ A_{f} = A \cdot (1 - \beta \cdot \Delta \cdot T)^{-1} = A(1 - \beta \cdot \Delta \cdot T) \]
+                \begin{equation}
+4F ^ 2 + 9F ^ 2 + 12F ^ 2 \cdot \cos(\theta) = R ^ 2 
+\end{equation}
+
+\begin{equation}
+4F ^ 2 + 36F ^ 2 + 24F ^ 2 \cdot \cos(\theta) = 4R ^ 2 
+\end{equation}
+
+\begin{equation}
+4F ^ 2 + 36F ^ 2 + 24F ^ 2 \cdot \cos(\theta) = 4(13F ^ 2 + 12F ^ 2 \cdot \cos(\theta)) = 52F ^ 2 + 48F ^ 2 \cdot \cos(\theta) 
+\end{equation}
+
+\begin{equation}
+\cos(\theta) = -\frac{12F ^ 2}{24F ^ 2} = -\frac{1}{2}
+\end{equation}
+              </p>
         </div>
     </div>    
 </body>
 <script>
+    window.history.forward();
+    function noBack() {
+        window.history.forward();
+    }
+
     givenans=[]
     correct=0
     wrong=0
