@@ -1,0 +1,183 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        /* Bordered form */
+        form {
+            border: 3px solid #f1f1f1;
+        }
+        .lmain{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Full-width inputs */
+        input {
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            font-size: 30px;
+            margin: 10px;
+            padding: 10px;
+        }
+	
+        .btn-group .btx {
+            color: black;
+            border: none;
+            background-color: antiquewhite;
+            width: 300px;
+            height: 50px;
+            margin-bottom: 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 25px;
+            cursor: pointer;
+            border-right: none; /* Prevent double borders */
+            border-top:none;
+            border-bottom:none;
+            }
+
+        .btn-group .btx:hover {
+            border-bottom: black 5px solid
+            }
+        /* Set a style for all buttons */
+        #fo1, #fo2{
+            display: grid;
+            margin: 10px;
+            font-size: 30px;
+            padding: 30px;
+        }        
+        .button {
+            background-color: #04AA6D;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            font-size: 20px;
+        }
+
+        /* Add a hover effect for buttons */
+        .button:hover {
+            opacity: 0.8;
+        }
+
+        /* Add padding to containers */
+        .container {
+            padding: 16px;
+            width: 610px;
+        }
+
+        /* The "Forgot password" text */
+        span.psw {
+            float: right;
+            padding-top: 16px;
+        }
+
+        /* Change styles for span and cancel button on extra small screens */
+        @media screen and (max-width: 300px) {
+            span.psw {
+                display: block;
+                float: none;
+            }
+            .cancelbtn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body onload="noBack()" onpageshow="if (event.persisted) noBack();">
+<div class="lmain">
+
+    <div class="container">
+        <form id="form"  method = POST >
+            {% csrf_token %}
+            <div class="btn-group">
+                <a href="{% url 'login' %}"><button type="button" class="btx" style="border-left:none;" onclick="dis()" >LOG IN</button></a>
+                <a href="{% url 'register' %}"><button type="button" class="btx" onclick="dis2()" >SIGN UP</button></a>
+            </div>            
+            <div id="fo2">
+                <label>Email Id</label>
+                {{form.email}}
+                <label>Username</label>
+                {{form.username}}
+				<div>
+					<p>choose your future:</p>
+					  <input type="radio" id="html" name="aim" value="JEE">
+					  <label for="html">JEE</label><br>
+					  <input type="radio" id="css" name="aim" value="NEET">
+					  <label for="css">NEET</label><br>
+				</div>
+				<select name="classs" id="options" >
+					<option value="11">11</option>
+					<option value="12">12</option>
+				  </select>				
+                <label>Create Password</label>
+				{{form.password1}}
+                <label>Confirm Password</label>
+				{{form.password2}}				
+                <button class="button" type="submit" onclick="s()">Sign Up</button>
+            </div>
+			{% if form.errors %}
+			{% for field in form %}
+				{% for error in field.errors %}
+					<div class="alert alert-danger">
+						<strong>{{ error|escape }}</strong>
+					</div>
+				{% endfor %}
+			{% endfor %}
+			{% for error in form.non_field_errors %}
+				<div class="alert alert-danger">
+					<strong>{{ error|escape }}</strong>
+				</div>
+			{% endfor %}
+		{% endif %}		
+            <h2>{{info}}</h2>
+        </form>
+    </div>
+	
+</div>
+    <footer>
+        <div class="copyright">
+            <p class="mag0"> © 2020 toolbox.co.in</p>
+        </div>
+    </footer>
+</body>
+<script>
+    window.history.forward();
+    function noBack() {
+        window.history.forward();
+    }
+	function s(){
+		if (document.querySelector('input[type="radio"]:checked')?.value == null ){
+			// This will reload the current page
+			print("flush")
+            window.location.reload();
+		}else{
+        aim=document.querySelector('input[type="radio"]:checked').value  
+		op=document.getElementById("options").value  
+	    console.log(aim, op)
+		//var xhr = new XMLHttpRequest();
+
+		// Configure it: POST-request for the URL
+		//xhr.open('POST', '', true);
+
+		// Set up the request headers
+		//xhr.setRequestHeader('Content-Type', 'application/json');
+		//xhr.setRequestHeader('X-CSRFToken', '{{ csrf_token }}');  // Ensure CSRF token is included
+
+		// Send the request with the JSON data
+		//xhr.send(JSON.stringify({ 'aim': op}));		
+		}
+	}
+</script>
+</html>
+
