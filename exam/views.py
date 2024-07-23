@@ -7,6 +7,9 @@ from .models import phy_easy
 from django.db.models import Count
 # Create your views here.
 def exampage(request):
+    print(request)
+    subject = request.GET.get('subject')
+    print(5, subject)
     i=1
     # Iterate through the dictionary and add each item to the array
     #row = phy_easy.objects.get(id=1)

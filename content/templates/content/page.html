@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'content\style.css' %}">
+    <title>Document</title>
+<style>
+</style>
+</head>
+
+<body style="height: 100%; background-color:rgba(249, 250, 251);">
+    {% load static %}
+
+    <div class="sticky-bar">
+        <div class="box">
+            <p class="logo">logo</p>
+             <p id="u" >{{name}}</p>
+			{% if user.is_authenticated %}
+            <a href="{% url 'logout' %}"><p class="cart" style="margin-left: 50%;">Log Out</p></a>
+            <script>
+                var isAuthenticated = true;
+            </script>			
+            {% else %}
+            <a href="{% url 'register' %}"><p class="cart" style="margin-left: 50%;">Sign Up</p></a>
+            <a href="{% url 'login' %}"><p class="cart" style="margin-left: 50%;">Log In</p></a>
+            <script>
+                var isAuthenticated = false;
+            </script>            
+			{% endif %}            
+        </div>
+    </div>
+   <div class="gr" style="  display: grid;grid-template-columns: repeat(3, 1fr);grid-template-rows: repeat(3, 100px);gap: 10px;grid-template-areas:'sidebar1 content sidebar2';">
+    <div style="grid-area: sidebar1;z-index: 2;">ugyiihuhiuhih</div>
+    <div style=" background-color: rgb(219, 202, 202); width: 700px; color: rgb(33, 46, 58);grid-area: content;">
+        <h2>Heat Capacity and Specific Heat</h2>
+           <p> Heat capacity  measures how much heat (q) a substance absorbs or releases when its temperature changes by 1 degree Celsius (or equivalently, 1 kelvin). It depends on both the type and amount of the substance. For example, a larger cast iron frying pan has a greater heat capacity than a smaller one because it contains more material.
+            
+            Specific heat capacity , also known as specific heat, quantifies the heat required to raise the temperature of 1 gram of a substance by 1 degree Celsius (or 1 kelvin). It’s an intensive property, meaning it depends only on the substance type, not its amount. For instance, the specific heat of iron (used to make the pan) is approximately 0.449 J/g°C.
+            </p>
+            <h2>Calorimetry</h2>
+            <p>Calorimetry involves measuring heat flow during chemical reactions or physical processes. A calorimeter, an insulated container, helps us analyze heat changes. Most reactions studied in calorimetry experiments involve liquids or aqueous solutions12.
+            
+            Remember, understanding heat and calorimetry is essential for grasping energy changes in chemical reactions. 📊🔬</p>
+        <p>book advertisment</p>
+        <div>
+            <div id="contentdiv" style="grid-area: sidebar2;" >    </div>
+            <h2 id="trigger-element" >chater contents</h2>
+            <h3>Wana try out some questions, feel free to click</h3>
+
+        </div>
+    </div>
+    <div id="popup" style="display: none;margin-left: 10%;">
+        <p id="maxvalue" style="display: none;">{{max}}</p>
+    </div>
+</div>
+  
+</body>
+<script>
+  nu=1
+  po=250
+  li_num=1
+  chap_check=-1
+  ran_check=-1
+  x=null
+  document.getElementById("trigger-element").addEventListener("click", function() {
+    document.getElementById("popup").style.display = "inline-block";
+    var newElement = document.createElement("span");
+    newElement.id= "content";
+    if(nu<=document.getElementById("maxvalue").innerHTML){
+        newElement.style="display: block;background: url(../static/content/heat/heat"+ CSS.escape(nu) +".png) no-repeat scroll 0 0 rgba(0, 0, 0, 0);height:875px; width: 700px;"
+        document.getElementById("contentdiv").appendChild(newElement);
+        window.scrollBy({
+                top: 600, // Adjust this value to scroll more or less
+                behavior: 'smooth'
+            });
+        quest = ["check out these questions", "lost motive!! try these", "bulid confidence with these questions", "feel like you can't click me", "Wanan test yourself", "push betond time limits", "July"];
+        if (isAuthenticated){
+           quest_chap="{{cate}}"
+        }else{
+            quest_chap=["phyiscs", "chemistry", "maths"]
+        }
+        for( j=1; j<4 ; j++, li_num++, po=po+250){
+            randomIndex = Math.floor(Math.random() * quest.length);
+            ranquest = quest[randomIndex];
+            console.log(randomIndex,ran_check,"frejuife")
+            if(randomIndex==ran_check){
+                console.log("alfred")
+                randomIndex = Math.floor(Math.random() * quest.length);
+                ranquest = quest[randomIndex];
+            
+                ran_check=randomIndex
+                console.log(ran_check,"frefe")
+            }
+            ran_check=randomIndex
+            
+            randomIndex_chap = Math.floor(Math.random() * quest_chap.length);
+            ranquest_chap = quest_chap[randomIndex_chap];
+            //console.log(randomIndex,ran_check,"frejuife")
+            if(randomIndex_chap==chap_check){
+                console.log("alfred")
+                randomIndex_chap = Math.floor(Math.random() * quest_chap.length);
+                ranquest_chap = quest_chap[randomIndex_chap];
+            
+                chap_check=randomIndex_chap
+                //console.log(ran_check,"frefe")
+            }
+            chap_check=randomIndex_chap
+            final = ranquest+ " "+ ranquest_chap
+            console .log(final ,"alfred")
+            var newElement = document.createElement("form");
+            //x="Gfag"
+            newElement.action="{% url 'exam:exam' %}"
+            newElement.method="GET"
+            newElement.id="link"+li_num
+            newElement.style="position: relative; top:"+ po +"px;   animation-name: example"+li_num+"; animation-duration: 4s;";
+            document.getElementById("popup").appendChild(newElement);
+            var style = document.createElement('style');
+            style.innerHTML = " @keyframes example"+li_num+" {0%   {background-color:red; left:200px; top:"+ po +"px;}100% {background-color:red; left:0px; top:"+ po +"px;}}"     
+            // Append the <style> element to the document head
+            document.head.appendChild(style);   
+            console.log(x, "aklfredc")
+            var newElement = document.createElement("input");
+            newElement.type="hidden"
+            newElement.name="subject"
+            newElement.value=x
+            document.getElementById("link"+li_num).appendChild(newElement);
+            var newElement = document.createElement("button");
+            newElement.type="submit"
+            newElement.style="height: 50px;border-radius: 10px; border-width: thick; border-color: darkcyan; color: darkcyan; font-size: 20px; ";
+            newElement.onclick=function() {extractq(this.innerHTML)};
+            newElement.innerHTML=final;
+            document.getElementById("link"+li_num).appendChild(newElement);
+                }
+    }else{
+        document.getElementById("trigger-element").innerHTML="congrats you finished the chapter"
+    }
+    nu=nu+1; 
+    console.log(po)
+  });
+  document.getElementById("trigger-element").click()
+
+ function extractq(value){
+    alert("fetching questions")
+    for (let item of quest) {
+        console.log(item , value);
+        if (value.includes(item)){
+        x=value.replace(item, "")
+        console.log(x, "Gsgs") 
+        document.querySelector('input').value=x
+        return x
+    }
+    
+    }
+    console.log("success")
+    //console.log(document.getElementById("test").innerHTML);
+    //diction=document.getElementById("test").innerHTML;
+    //diction=diction.split("', '");
+    //console.log(diction[3]);
+    //localStorage.setItem("diction", diction);
+}
+isAuthenticated
+</script>
+</html>
