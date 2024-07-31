@@ -141,6 +141,7 @@
 			{% endfor %}
 		{% endif %}		
             <h2>{{info}}</h2>
+            <h2>{{error}}</h2>
         </form>
     </div>
 	
@@ -159,7 +160,7 @@
 	function s(){
 		if (document.querySelector('input[type="radio"]:checked')?.value == null ){
 			// This will reload the current page
-			print("flush")
+			console.log("flush")
             window.location.reload();
 		}else{
         aim=document.querySelector('input[type="radio"]:checked').value  

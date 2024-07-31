@@ -9,4 +9,4 @@ class use_info(models.Model):
     category = models.TextField(default='none')
     score =models.IntegerField(default=0)
     def __str__(self):
-        return self.question
+        return self.username

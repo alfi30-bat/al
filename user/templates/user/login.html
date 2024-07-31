@@ -3,6 +3,9 @@
 <html>
 
 <head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'exam/style.css' %}">    
+    
     <style>
         /* Bordered form */
         form {
@@ -92,11 +95,52 @@
                 width: 100%;
             }
         }
+/* The navigation bar */
+.navbar {
+    overflow: hidden;
+    background-color: #333;
+    position: fixed; /* Set the navbar to fixed position */
+    top: 0; /* Position the navbar at the top of the page */
+    width: 100%; /* Full width */
+}
+
+/* Links inside the navbar */
+.navbar a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+/* Change background on mouse-over */
+.navbar a:hover {
+    background: #ddd;
+    color: black;
+}
+
+/* Main content */
+.main {
+    margin-top: 50px; /* Add a top margin to avoid content overlay */
+}
+
     </style>
 </head>
 <body onload="noBack()" onpageshow="if (event.persisted) noBack();">
 <div class="lmain">
-
+    <div class="sticky-bar">
+        <div class="box">
+            <a href="{% url 'content:main' %}"><p class="logo">logo</p></a>
+            <p class="logo">q score</p>
+            <a><p class="cart" style="margin-left: 50%;">Log In</p></a>
+        </div>
+    </div>
+    <div class="navbar">
+        <a href="#home">Home</a>
+        <a href="#news">News</a>
+        <a href="#contact">Contact</a>
+    </div>
     <div class="container">
         <form id="form"  method = "POST">
             {% csrf_token %}
@@ -108,7 +152,22 @@
                 {{form}}   
                 <button class="button" type="submit">Log In</button>
             </div>
+			{% if form.errors %}
+			{% for field in form %}
+				{% for error in field.errors %}
+					<div class="alert alert-danger">
+						<strong>{{ error|escape }}frefe</strong>
+					</div>
+				{% endfor %}
+			{% endfor %}
+			{% for error in form.non_field_errors %}
+				<div class="alert alert-danger">
+					<strong>{{ error|escape }}</strong>
+				</div>
+			{% endfor %}
+		{% endif %}	            
             <h2>{{info}}</h2>
+            <h2>{{error}}</h2>
         </form>
     </div>
 </div>
