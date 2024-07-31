@@ -10,5 +10,7 @@ urlpatterns = [
 
     # ex: /exam/result/
     path("result/", views.answerpage, name = "anspage"),
+    #path("score/", views.core, name = "sco"),
+    path("detailed/", views.danswerpage, name = "danss"),
    
 ]

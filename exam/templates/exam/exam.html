@@ -99,12 +99,20 @@
         </div>
     </div>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/crypto-js@4.1.1/crypto-js.js"></script>
 <script>
+localStorage.setItem('hasRun', 'false');
 function send(){
-    const arrayString = JSON.stringify(answer);           
-    localStorage.setItem("answer", arrayString);      
-    const jsonString = JSON.stringify(g_answer);              
-    localStorage.setItem("g_answer", jsonString);   
+    //const jsonString = JSON.stringify(g_answer);              
+    //localStorage.setItem("g_answer", jsonString);
+    const g = CryptoJS.AES.encrypt(JSON.stringify(g_answer), "secret key 123").toString();
+    localStorage.setItem("gans", g);       
+    const a = CryptoJS.AES.encrypt(JSON.stringify(answer), "secret key 123").toString();
+    localStorage.setItem("ans", a); 
+    const q = CryptoJS.AES.encrypt(JSON.stringify(questions), "secret key 123").toString();
+    localStorage.setItem("quest", q);  
+    const op= CryptoJS.AES.encrypt(JSON.stringify(options), "secret key 123").toString();
+    localStorage.setItem("opt", op);               
 }
 const d = new Date();
 const dd = String(d.getDate()).padStart(2); // Day

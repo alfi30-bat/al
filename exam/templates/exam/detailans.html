@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'exam/style.css' %}">   
+    <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>      
+<style>
+      /* The navigation bar */
+.navbar {
+    overflow: hidden;
+    background-color: #333;
+    position: fixed; /* Set the navbar to fixed position */
+    top: 0; /* Position the navbar at the top of the page */
+    width: 100%; /* Full width */
+}
+
+/* Links inside the navbar */
+.navbar a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+/* Change background on mouse-over */
+.navbar a:hover {
+    background: #ddd;
+    color: black;
+}
+</style>
+</head>
+<body onload="noBack()" onpageshow="if (event.persisted) noBack();">
+    <div class="navbar">
+        <a href="{% url 'content:main' %}">home</a>
+        {% if user.is_authenticated %}
+        <a href="{% url 'logout' %}">Log Out</a>
+        <a style="color: aquamarine; float: right; margin-right: 20px;">Q~score  {{score}} </a>         
+        <script>
+            var isAuthenticated = true;
+        </script>			
+        {% else %}
+        <a href="{% url 'user:login' %}" style="color: aquamarine; ">Q~score  {{score}} </a>  
+        <a href="{% url 'register' %}">Sign Up</a>
+        <a href="{% url 'login' %}">Log In</p></a>        
+        <script>
+            var isAuthenticated = false;
+        </script>            
+        {% endif %}           
+    </div>  
+    <div id="main"></div>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/crypto-js@4.1.1/crypto-js.js"></script>
+
+<script>
+    givenans=[]
+    correct=0
+    wrong=0
+    score=0
+    const storedJsonString = localStorage.getItem('gans');
+    const bytes = CryptoJS.AES.decrypt(storedJsonString, "secret key 123");
+    var givnans = bytes.toString(CryptoJS.enc.Utf8);    
+    givnans=JSON.parse(givnans)
+    for (const key in givnans) {
+    const value = givnans[key];
+    givenans.push(value)
+    console.log(`Key: ${key}, Value: ${value}`);
+}    
+
+    const storedArrayString = localStorage.getItem("ans");
+    const byte = CryptoJS.AES.decrypt(storedArrayString, "secret key 123");
+    var ans = byte.toString(CryptoJS.enc.Utf8);
+    ans=JSON.parse(ans)
+
+    var dans = JSON.parse('{{ dans|escapejs }}');
+
+
+    const storedArrayStri = localStorage.getItem("quest");
+    const by = CryptoJS.AES.decrypt(storedArrayStri, "secret key 123");
+    var question = by.toString(CryptoJS.enc.Utf8); 
+    question=JSON.parse(question)
+
+    const storedArrayStr = localStorage.getItem("opt");
+    const b = CryptoJS.AES.decrypt(storedArrayStr, "secret key 123");
+    var option = b.toString(CryptoJS.enc.Utf8);     
+    option=JSON.parse(option)
+     console.log(question,option, givenans, ans)
+    for(r=0,k=0;r<ans.length;k=k+4, r++){
+        console.log("akfrej")
+        console.log(option[r])
+        var newElement = document.createElement("h2");
+        newElement.innerHTML=question[r]
+        document.getElementById("main").appendChild(newElement); 
+
+        var newElement = document.createElement("h3");
+        newElement.innerHTML=option[k]
+        document.getElementById("main").appendChild(newElement);         
+        var newElement = document.createElement("h3");
+        newElement.innerHTML=option[k+1]
+        document.getElementById("main").appendChild(newElement);        
+        var newElement = document.createElement("h3");
+        newElement.innerHTML=option[k+2]
+        document.getElementById("main").appendChild(newElement);        
+        var newElement = document.createElement("h3");
+        newElement.innerHTML=option[k+3]
+        document.getElementById("main").appendChild(newElement);        
+        
+        var newElement = document.createElement("h3");
+        newElement.innerHTML="your answer: "+givenans[r]
+        document.getElementById("main").appendChild(newElement); 
+        var newElement = document.createElement("h3");
+        newElement.innerHTML="correct answer: "+ans[r]
+        document.getElementById("main").appendChild(newElement);      
+
+        var newElement = document.createElement("h2");
+        newElement.innerHTML="detailed answer"
+        document.getElementById("main").appendChild(newElement);                        
+
+        var newElement = document.createElement("h3");
+        newElement.innerHTML=dans[r]
+        document.getElementById("main").appendChild(newElement);                        
+    }
+
+</script>
+</html>

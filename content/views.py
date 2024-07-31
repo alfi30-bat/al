@@ -1,29 +1,50 @@
+import pandas as pd
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
 from django.shortcuts import render
 import os
 # Create your views here.
+
 from user.models import use_info
 from django.contrib.auth import get_user
 
-global file_count
-file_count=7
+
+
+
+def mainn(request):
+    return render(request, 'content/main.html' )
+
+@csrf_exempt
 
 def load(request):
     global file_count
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            print(data)
+            global nam
+            nam = data.get('nam')
+            # Process the data as needed
+            response_data = {'status': 'success', 'aim_received': nam}
+            print(nam)
+            return JsonResponse(response_data)
+        except json.JSONDecodeError:
+            return JsonResponse({'status': 'error', 'message': 'Invalid JSON'}, status=400)    
+    nam="heat"    
+    df=pd.read_excel("sample.xlsx")
+    conte= df[nam].tolist()            
     user = get_user(request)
     username = user.username
-    if username=="": 
-        folder_path = 'content/static/content/heat'
-        file_count = len([name for name in os.listdir(folder_path) if os.path.isfile(os.path.join(folder_path, name))])
-        print(f'The number of files in {folder_path} is {file_count}')        
+    if username=="":    
         print(username) 
         cat="null"
         cla="null"
-        return render(request, 'content/page.html', {'max':file_count, 'cate':cat, 'cla':cla } )
+        return render(request, 'content/page.html', {'max':json.dumps(conte), 'cate':cat, 'cla':cla } )
     else:
-        folder_path = 'content/static/content/heat'
-        file_count = len([name for name in os.listdir(folder_path) if os.path.isfile(os.path.join(folder_path, name))])
-        print(f'The number of files in {folder_path} is {file_count}')
         blog = use_info.objects.get(username=username)
         cat= blog.category
-        cla= blog.classs
-        return render(request, 'content/page.html', {'max':file_count, 'cate':cat, 'cla':cla } )
+        cla= blog.classs               
+        scor= blog.score      
+        print(scor)         
+        return render(request, 'content/page.html', {'max':json.dumps(conte), 'cate':cat, 'cla':cla, 'score':scor } )

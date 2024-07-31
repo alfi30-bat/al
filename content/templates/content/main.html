@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>    
+
+<body>
+    <input disabled value="ktg brisk">
+    <a href="{% url 'content:page' %}"><button type="submit" onclick="cl(this.innerHTML)">ktg brisk</button></a>
+    <a href="http://docs.mathjax.org/en/latest/basic/mathematics.html"></a>:    
+    <p>
+        \[
+        n = \frac{m}{M}
+        \]
+        
+        \[
+        PV = \frac{m}{M} RT
+        \]
+        
+        \[
+        P = \frac{m}{VM} RT
+        \]
+        
+        \[
+        P = \frac{\rho RT}{M}
+        \]
+
+
+        <p id="ex">
+            This type of random motion is termed "Brownian Motion". We also assume that the distribution of speeds does not change in time, despite the collisions between molecules. That is, at any given moment, a certain percentage of molecules move at high speeds, a certain percentage move at low speeds, and so on.
+
+\begin{enumerate}
+    \setcounter{enumi}{6}
+    \item The gas under consideration is assumed to be a pure substance. That is, all of its molecules are identical.
+    \item The effect of gravity on gas molecules in a container is neglected. That is, in a container, we assume the density of gas is the same throughout its volume.
+    \item At all temperatures and pressures, all gases obey the ideal gas law which relates the microscopic characteristics of a gas, i.e., pressure, volume, and temperature. The ideal gas law is stated as:
+    \begin{equation}
+    PV = nRT
+    \end{equation}
+    Here, \( n \) is the number of moles of a gas and \( R \) is the universal gas constant. In the next sections of the chapter, we'll discuss the gas law in detail.
+
+    Generally, real gases obey the ideal gas law \( PV = nRT \) only at very high temperatures and very low pressures. At very high temperatures, the kinetic energy of the gas molecules is so high that even if some interaction between molecules is present, it will not contribute any energy. At very low pressures, the separation between molecules is very large, thus reducing their interaction. So, we can say that at high temperatures and low pressures, real gases behave like ideal gases.
+\end{enumerate}
+
+Boyle's Law states that the pressure exerted by a gas at constant temperature is inversely proportional to the volume in which it is enclosed. Thus, Boyle's law is written as:
+\begin{equation}
+PV = \text{constant}
+\end{equation}
+
+        </p>
+    </p>
+</body>
+
+<script>
+    function cl(val){
+        document.getElementById("ex").style.display="block"
+    
+		var xhr = new XMLHttpRequest();
+
+		// Configure it: POST-request for the URL
+		xhr.open('POST', 'http://127.0.0.1:8000/content/al/', true);
+
+		// Set up the request headers
+		xhr.setRequestHeader('Content-Type', 'application/json');
+		xhr.setRequestHeader('X-CSRFToken', '{{ csrf_token }}');  // Ensure CSRF token is included
+
+		// Send the request with the JSON data
+		xhr.send(JSON.stringify({ 'nam': val}));	
+        }    
+</script>
+</html>

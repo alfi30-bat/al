@@ -7,31 +7,32 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'content\style.css' %}">
     <title>Document</title>
+    <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>    
 <style>
 </style>
 </head>
 
 <body style="height: 100%; background-color:rgba(249, 250, 251);">
     {% load static %}
-
-    <div class="sticky-bar">
-        <div class="box">
-            <p class="logo">logo</p>
-             <p id="u" >{{name}}</p>
-			{% if user.is_authenticated %}
-            <a href="{% url 'logout' %}"><p class="cart" style="margin-left: 50%;">Log Out</p></a>
-            <script>
-                var isAuthenticated = true;
-            </script>			
-            {% else %}
-            <a href="{% url 'register' %}"><p class="cart" style="margin-left: 50%;">Sign Up</p></a>
-            <a href="{% url 'login' %}"><p class="cart" style="margin-left: 50%;">Log In</p></a>
-            <script>
-                var isAuthenticated = false;
-            </script>            
-			{% endif %}            
-        </div>
-    </div>
+    <div class="navbar">
+        <a href="{% url 'content:main' %}">home</a>
+        {% if user.is_authenticated %}
+        <a href="{% url 'logout' %}">Log Out</a>
+        <a style="color: aquamarine; float: right; margin-right: 20px;">Q~score  {{score}} </a>         
+        <script>
+            var isAuthenticated = true;
+        </script>			
+        {% else %}
+        <a href="{% url 'user:login' %}" style="color: aquamarine; ">Q~score  {{score}} </a>  
+        <a href="{% url 'register' %}">Sign Up</a>
+        <a href="{% url 'login' %}">Log In</p></a>        
+        <script>
+            var isAuthenticated = false;
+        </script>            
+        {% endif %}           
+    </div>  
    <div class="gr" style="  display: grid;grid-template-columns: repeat(3, 1fr);grid-template-rows: repeat(3, 100px);gap: 10px;grid-template-areas:'sidebar1 content sidebar2';">
     <div style="grid-area: sidebar1;z-index: 2;">ugyiihuhiuhih</div>
     <div style=" background-color: rgb(219, 202, 202); width: 700px; color: rgb(33, 46, 58);grid-area: content;">
@@ -46,7 +47,9 @@
             Remember, understanding heat and calorimetry is essential for grasping energy changes in chemical reactions. 📊🔬</p>
         <p>book advertisment</p>
         <div>
-            <div id="contentdiv" style="grid-area: sidebar2;" >    </div>
+            <div id="contentdiv" style="grid-area: sidebar2;" >
+                    
+            </div>
             <h2 id="trigger-element" >chater contents</h2>
             <h3>Wana try out some questions, feel free to click</h3>
 
@@ -54,12 +57,13 @@
     </div>
     <div id="popup" style="display: none;margin-left: 10%;">
         <p id="maxvalue" style="display: none;">{{max}}</p>
+        <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">            
     </div>
 </div>
   
 </body>
 <script>
-  nu=1
+  nu=0
   po=250
   li_num=1
   chap_check=-1
@@ -69,9 +73,16 @@
     document.getElementById("popup").style.display = "inline-block";
     var newElement = document.createElement("span");
     newElement.id= "content";
-    if(nu<=document.getElementById("maxvalue").innerHTML){
-        newElement.style="display: block;background: url(../static/content/heat/heat"+ CSS.escape(nu) +".png) no-repeat scroll 0 0 rgba(0, 0, 0, 0);height:875px; width: 700px;"
+    var myList = JSON.parse('{{ max|escapejs }}');
+    console.log(myList);
+    if(myList.length>=nu){
+
+        newElement.innerHTML=myList[nu]
+        newElement.style="white-space: pre-line"
+        newElement.id="a"+nu
+        //newElement.style="display: block;background: url(../static/content/heat/heat"+ CSS.escape(nu) +".png) no-repeat scroll 0 0 rgba(0, 0, 0, 0);height:875px; width: 700px;"
         document.getElementById("contentdiv").appendChild(newElement);
+
         window.scrollBy({
                 top: 600, // Adjust this value to scroll more or less
                 behavior: 'smooth'
@@ -142,6 +153,22 @@
   });
   document.getElementById("trigger-element").click()
 
+  function sendDataToDjango(x) {
+    var data = {
+        subject: x,
+        csrfmiddlewaretoken: document.querySelector('[name=csrfmiddlewaretoken]').value
+    };
+    console.log("innn")
+    fetch('http://127.0.0.1:8000/content/al/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': data.csrfmiddlewaretoken
+        },
+        body: JSON.stringify(data)
+    })
+}
+
  function extractq(value){
     alert("fetching questions")
     for (let item of quest) {
@@ -149,6 +176,7 @@
         if (value.includes(item)){
         x=value.replace(item, "")
         console.log(x, "Gsgs") 
+        sendDataToDjango(x)
         document.querySelector('input').value=x
         return x
     }

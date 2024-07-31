@@ -6,7 +6,8 @@ from . import views
 app_name = "content"
 urlpatterns = [
     # ex: /exam/
-     path("", views.load, name = "page"),
+     path("", views.mainn, name = "main"),
+     path("al/", views.load, name = "page"),
     # ex: /exam/result/
    
 ]
