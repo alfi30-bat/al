@@ -46,15 +46,19 @@
             var isAuthenticated = true;
         </script>			
         {% else %}
-        <a href="{% url 'user:login' %}" style="color: aquamarine; ">Q~score  {{score}} </a>  
+        <a href="{% url 'login' %}" style="color: aquamarine; ">Q~score  {{score}} </a>  
         <a href="{% url 'register' %}">Sign Up</a>
         <a href="{% url 'login' %}">Log In</p></a>        
         <script>
             var isAuthenticated = false;
         </script>            
-        {% endif %}           
+        {% endif %}          
     </div>  
-    <div id="main"></div>
+    <div style="margin-top: 82px;">
+        <h1>{{lo}}</h1>
+        
+        <div id="main"></div>
+    </div>
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/crypto-js@4.1.1/crypto-js.js"></script>

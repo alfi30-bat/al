@@ -2,6 +2,7 @@ from django.contrib.auth import get_user
 from django.shortcuts import render, get_object_or_404
 import sqlite3, random,json
 from random import randint
+from django.core.exceptions import ObjectDoesNotExist
 
 from .models import phy_easy
 from user.models import use_info
@@ -78,5 +79,6 @@ def danswerpage(request):
         blog = use_info.objects.get(username=username)     
         print(blog)        
         return render(request, 'exam/detailans.html', {'dans':json.dumps(dans), 'score':blog.score} )
-    except NameError:
-        return render(request, 'content/main.html')
+    except use_info.DoesNotExist:
+        print("advertisment")
+        return render(request, 'exam/detailans.html', {'dans':json.dumps(dans), 'lo': "please login to save your score"})

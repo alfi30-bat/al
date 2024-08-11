@@ -7,16 +7,26 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'content\style.css' %}">
     <title>Document</title>
-    <script type="text/javascript" id="MathJax-script" async
-        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-    </script>    
+
+    <script type="text/javascript">
+        MathJax = {
+            loader: {load: ['input/asciimath', 'output/chtml']},
+            asciimath: {
+                delimiters: [['`', '`']]  // Default delimiters for AsciiMath
+            }
+        };
+    </script>
+    <script type="text/javascript" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/startup.js">
+    </script>
+
 <style>
 </style>
 </head>
 
 <body style="height: 100%; background-color:rgba(249, 250, 251);">
     {% load static %}
-    <div class="navbar">
+    <div class="navbar" style="z-index: 2;">
         <a href="{% url 'content:main' %}">home</a>
         {% if user.is_authenticated %}
         <a href="{% url 'logout' %}">Log Out</a>
@@ -25,7 +35,7 @@
             var isAuthenticated = true;
         </script>			
         {% else %}
-        <a href="{% url 'user:login' %}" style="color: aquamarine; ">Q~score  {{score}} </a>  
+        <a href="{% url 'login' %}" style="color: aquamarine; ">Q~score  {{score}} </a>  
         <a href="{% url 'register' %}">Sign Up</a>
         <a href="{% url 'login' %}">Log In</p></a>        
         <script>
@@ -33,10 +43,13 @@
         </script>            
         {% endif %}           
     </div>  
-   <div class="gr" style="  display: grid;grid-template-columns: repeat(3, 1fr);grid-template-rows: repeat(3, 100px);gap: 10px;grid-template-areas:'sidebar1 content sidebar2';">
+   <div class="gr" style=" margin-top: 82px;  display: grid;grid-template-columns: repeat(3, 1fr);grid-template-rows: repeat(3, 100px);gap: 10px;grid-template-areas:'sidebar1 content sidebar2';">
     <div style="grid-area: sidebar1;z-index: 2;">ugyiihuhiuhih</div>
     <div style=" background-color: rgb(219, 202, 202); width: 700px; color: rgb(33, 46, 58);grid-area: content;">
-        <h2>Heat Capacity and Specific Heat</h2>
+        <h2>Heat Capacity and Specific Heat         \[
+            n = \frac{m}{M}
+            \]`F_{e} = r/g` `x = (-b +- sqrt(b^2 - 4ac))/(2a)`
+             </h2>
            <p> Heat capacity  measures how much heat (q) a substance absorbs or releases when its temperature changes by 1 degree Celsius (or equivalently, 1 kelvin). It depends on both the type and amount of the substance. For example, a larger cast iron frying pan has a greater heat capacity than a smaller one because it contains more material.
             
             Specific heat capacity , also known as specific heat, quantifies the heat required to raise the temperature of 1 gram of a substance by 1 degree Celsius (or 1 kelvin). It’s an intensive property, meaning it depends only on the substance type, not its amount. For instance, the specific heat of iron (used to make the pan) is approximately 0.449 J/g°C.
@@ -45,7 +58,8 @@
             <p>Calorimetry involves measuring heat flow during chemical reactions or physical processes. A calorimeter, an insulated container, helps us analyze heat changes. Most reactions studied in calorimetry experiments involve liquids or aqueous solutions12.
             
             Remember, understanding heat and calorimetry is essential for grasping energy changes in chemical reactions. 📊🔬</p>
-        <p>book advertisment</p>
+        <p>book advertisment `F_{e} = r/g`</p>
+        <p id="joke">book advertisment `F_{e} = r/g`</p>
         <div>
             <div id="contentdiv" style="grid-area: sidebar2;" >
                     
@@ -76,12 +90,14 @@
     var myList = JSON.parse('{{ max|escapejs }}');
     console.log(myList);
     if(myList.length>=nu){
-
+        
         newElement.innerHTML=myList[nu]
         newElement.style="white-space: pre-line"
         newElement.id="a"+nu
+
         //newElement.style="display: block;background: url(../static/content/heat/heat"+ CSS.escape(nu) +".png) no-repeat scroll 0 0 rgba(0, 0, 0, 0);height:875px; width: 700px;"
         document.getElementById("contentdiv").appendChild(newElement);
+        document.getElementById("joke").innerHTML = "`x = (-b +- sqrt(b^2 - 4ac))/(2a)`"
 
         window.scrollBy({
                 top: 600, // Adjust this value to scroll more or less
@@ -145,11 +161,13 @@
             newElement.innerHTML=final;
             document.getElementById("link"+li_num).appendChild(newElement);
                 }
+        MathJax.typeset();        
     }else{
         document.getElementById("trigger-element").innerHTML="congrats you finished the chapter"
     }
     nu=nu+1; 
     console.log(po)
+    
   });
   document.getElementById("trigger-element").click()
 

@@ -47,7 +47,7 @@
            var isAuthenticated = true;
        </script>			
        {% else %}
-       <a href="{% url 'user:login' %}" style="color: aquamarine; ">Q~score  {{score}} </a>  
+       <a href="{% url 'login' %}" style="color: aquamarine; ">Q~score  {{score}} </a>  
        <a href="{% url 'register' %}">Sign Up</a>
        <a href="{% url 'login' %}">Log In</p></a>        
        <script>
@@ -57,15 +57,15 @@
     </div>    
     <div style="background-color: cornsilk; width: 600px; height: 500px; margin: 30%; margin-top: 10%; text-align: center; padding: 40px;">
         <h2 id="sco">Your score</h2>
-        <div style="margin-top: 10%; margin-left: 5%; width: 500px; display: grid;   grid-template-columns: repeat(2, 1fr);grid-template-rows: repeat(2, 100px);">    
+        <div style="margin-top: 10%; margin-left: 5%; width: 500px; display: grid;   grid-template-columns: repeat(2, 1fr);grid-template-rows: repeat(1, 100px);">    
             <h3 id="cor" >no of correct</h3>
-            <h3 id="incor" >no of incorrect</h3>
-            {% if user.is_authenticated %}			
-            {% else %}
-            <h3 id="nof" >login to save your score</h3>
-            {% endif %}              
+            <h3 id="incor" >no of incorrect</h3>            
         </div>
         <div>
+            {% if user.is_authenticated %}			
+            {% else %}
+            <h1 id="nof" >login to save your score</h1>
+            {% endif %}  
             <a href="{% url 'exam:exam' %}"><h3 >go for another pentagon(5 questions)</h3></a>
             <h3>check out this 10 questions</h3>
             <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">            
