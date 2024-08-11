@@ -96,7 +96,9 @@
 </head>
 <body onload="noBack()" onpageshow="if (event.persisted) noBack();">
 <div class="lmain">
-
+    <div class="navbar">
+        <a href="{% url 'content:main' %}">home</a>        
+    </div>  
     <div class="container">
         <form id="form"  method = POST >
             {% csrf_token %}

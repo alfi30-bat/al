@@ -81,7 +81,7 @@ def Login(request):
 
 def logout_view(request):
     logout(request)
-    return redirect('content/main/')
+    return render(request, 'content/main.html')
 
 def home(request):
 	if request.user.is_anonymous == True:
