@@ -19,9 +19,12 @@ def extract_pages(file_path):
 
 # Example usage
 file_path = 'E:/ktg brisk.pdf'
-#pages = extract_pages(file_path)
+pages = extract_pages(file_path)
 #for page in pages:
-   #ws.append(page)
+#   ws.append(page)
+#   print(page)
+for page in pages:
+    ws.cell(row= 4, column=2, value=page)   
 
 
 

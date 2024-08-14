@@ -77,23 +77,59 @@
   
 </body>
 <script>
+  u = 0
   nu=0
-  po=250
+  nuu=0
+  po=150
   li_num=1
   chap_check=-1
   ran_check=-1
+  img_num = 1
   x=null
+  let image_name = localStorage.getItem("name");
   document.getElementById("trigger-element").addEventListener("click", function() {
     document.getElementById("popup").style.display = "inline-block";
-    var newElement = document.createElement("span");
-    newElement.id= "content";
     var myList = JSON.parse('{{ max|escapejs }}');
     console.log(myList);
-    if(myList.length>=nu){
-        
-        newElement.innerHTML=myList[nu]
-        newElement.style="white-space: pre-line"
-        newElement.id="a"+nu
+   
+    if(myList.length>nu){
+        q = myList[nu]
+        console.log(nu, "manfdan")
+        if(q.includes("&image&")){
+            console.log("alfred jeson")
+            neww = q.split("&image&")
+            var newElement = document.createElement("span");
+            newElement.innerHTML=neww[u]
+            newElement.style="white-space: pre-line"
+            newElement.id="a"+ nuu 
+            u++
+            nuu++
+            console.log(neww)
+            document.getElementById("contentdiv").appendChild(newElement);            
+            for(;u<neww.length;u++, nuu++, img_num++){
+                console.log("alfred jeson kaaaa")
+                var neElement = document.createElement("h1");
+                neElement.innerHTML = image_name+ img_num                                 
+                neElement.src = "../static/content/attempted.png"
+                document.getElementById("contentdiv").appendChild(neElement);   
+                var newElement = document.createElement("span");
+                newElement.innerHTML=neww[u]
+                newElement.style="white-space: pre-line"
+                console.log(u, neww[u], "aspertos", neww.length)
+                newElement.id="a"+ nuu 
+                document.getElementById("contentdiv").appendChild(newElement);
+
+            
+            } 
+            u=0 
+        }else{
+            console.log("kulfi", nu)
+            var newElement = document.createElement("span");
+            newElement.innerHTML=q
+            newElement.style="white-space: pre-line"
+            newElement.id="a"+nuu
+        }
+
 
         //newElement.style="display: block;background: url(../static/content/heat/heat"+ CSS.escape(nu) +".png) no-repeat scroll 0 0 rgba(0, 0, 0, 0);height:875px; width: 700px;"
         document.getElementById("contentdiv").appendChild(newElement);
@@ -109,7 +145,7 @@
         }else{
             quest_chap=["phyiscs", "chemistry", "maths"]
         }
-        for( j=1; j<4 ; j++, li_num++, po=po+250){
+        for( j=1; j<4 ; j++, li_num++, po=po+150){
             randomIndex = Math.floor(Math.random() * quest.length);
             ranquest = quest[randomIndex];
             console.log(randomIndex,ran_check,"frejuife")
@@ -160,13 +196,16 @@
             newElement.onclick=function() {extractq(this.innerHTML)};
             newElement.innerHTML=final;
             document.getElementById("link"+li_num).appendChild(newElement);
-                }
-        MathJax.typeset();        
+            }
+        
+        MathJax.typeset();   
+        console.log("patyi", myList.length, nu)
     }else{
         document.getElementById("trigger-element").innerHTML="congrats you finished the chapter"
     }
     nu=nu+1; 
-    console.log(po)
+    nuu=nuu+1
+    console.log(po,"afreeeeeeee")
     
   });
   document.getElementById("trigger-element").click()

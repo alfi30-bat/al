@@ -216,6 +216,8 @@ PV = \text{constant}
 
 		// Send the request with the JSON data
 		xhr.send(JSON.stringify({ 'nam': val}));	
+        //const jsonString = JSON.stringify(g_answer);              
+        localStorage.setItem("name", val);
         }    
 </script>
 </html>
