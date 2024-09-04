@@ -31,9 +31,17 @@ def load(request):
             return JsonResponse(response_data)
         except json.JSONDecodeError:
             return JsonResponse({'status': 'error', 'message': 'Invalid JSON'}, status=400)    
-    nam="heat"    
+    #nam="heat"    
     df=pd.read_excel("sample.xlsx")
-    conte= df[nam].tolist()            
+    try:
+        df_cleaned = df.dropna()
+        conte= df_cleaned[nam].tolist()  
+        print(len(conte))
+        
+    except KeyError:
+        return render(request, 'content/main.html' )
+    except NameError:
+        return render(request, 'content/main.html' )    
     user = get_user(request)
     username = user.username
     if username=="":    

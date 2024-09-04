@@ -108,13 +108,13 @@
             document.getElementById("contentdiv").appendChild(newElement);            
             for(;u<neww.length;u++, nuu++, img_num++){
                 console.log("alfred jeson kaaaa")
-                var neElement = document.createElement("h1");
+                var neElement = document.createElement("img");
                 neElement.innerHTML = image_name+ img_num                                 
-                neElement.src = "../static/content/attempted.png"
+                neElement.src = "../../static/content/"+image_name+img_num+".png"
                 document.getElementById("contentdiv").appendChild(neElement);   
                 var newElement = document.createElement("span");
                 newElement.innerHTML=neww[u]
-                newElement.style="white-space: pre-line"
+                newElement.style="white-space: pre-line font-size: 20px;"
                 console.log(u, neww[u], "aspertos", neww.length)
                 newElement.id="a"+ nuu 
                 document.getElementById("contentdiv").appendChild(newElement);
@@ -126,7 +126,7 @@
             console.log("kulfi", nu)
             var newElement = document.createElement("span");
             newElement.innerHTML=q
-            newElement.style="white-space: pre-line"
+            newElement.style="white-space: pre-line; font-size: 20px;"
             newElement.id="a"+nuu
         }
 
@@ -181,7 +181,7 @@
             newElement.style="position: relative; top:"+ po +"px;   animation-name: example"+li_num+"; animation-duration: 4s;";
             document.getElementById("popup").appendChild(newElement);
             var style = document.createElement('style');
-            style.innerHTML = " @keyframes example"+li_num+" {0%   {background-color:red; left:200px; top:"+ po +"px;}100% {background-color:red; left:0px; top:"+ po +"px;}}"     
+            style.innerHTML = " @keyframes example"+li_num+" {0%   {background-color:white; left:200px; top:"+ po +"px;}100% {background-color:white; left:0px; top:"+ po +"px;}}"     
             // Append the <style> element to the document head
             document.head.appendChild(style);   
             console.log(x, "aklfredc")
@@ -192,7 +192,7 @@
             document.getElementById("link"+li_num).appendChild(newElement);
             var newElement = document.createElement("button");
             newElement.type="submit"
-            newElement.style="height: 50px;border-radius: 10px; border-width: thick; border-color: darkcyan; color: darkcyan; font-size: 20px; ";
+            newElement.style="border-radius: 10px; border-width: thick; border-color: darkcyan; color: darkcyan; font-size: 20px; ";
             newElement.onclick=function() {extractq(this.innerHTML)};
             newElement.innerHTML=final;
             document.getElementById("link"+li_num).appendChild(newElement);
@@ -208,7 +208,7 @@
     console.log(po,"afreeeeeeee")
     
   });
-  document.getElementById("trigger-element").click()
+  //document.getElementById("trigger-element").click()
 
   function sendDataToDjango(x) {
     var data = {

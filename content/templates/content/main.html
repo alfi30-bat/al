@@ -47,158 +47,116 @@ article {
     background-color: none;
     border-radius: 10px;
 }
+.container {
+            display: flex;
+            align-items: center;
+            margin: 100px;
+        }
+.container img {
+    max-width: 100px; /* Adjust as needed */
+    margin-left: 20px; /* Space between image and text */
+}
+.navbar {
+    overflow: hidden;
+    background-color: #333;
+    position: fixed; /* Set the navbar to fixed position */
+    top: 0; /* Position the navbar at the top of the page */
+    width: 100%; /* Full width */
+}
+
+/* Links inside the navbar */
+.navbar a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+/* Change background on mouse-over */
+.navbar a:hover {
+    background: #ddd;
+    color: black;
+}
+
+/* Main content */
+.main {
+    margin-top: 50px; /* Add a top margin to avoid content overlay */
+}
+
 </style>
 <body>
-    <input disabled value="ktg brisk">
-    <a href="{% url 'content:page' %}"><button type="submit" onclick="cl(this.innerHTML)">ktg brisk</button></a>
-    <a href="http://docs.mathjax.org/en/latest/basic/mathematics.html"></a>:    
-    <p>frerferferfref</p>
-    <p>frerferferfref</p>
-    <p>frerferferfref</p>
-    <p>frerferferfref</p>
-    <p>frerferferfref</p>
-    <p>frerferferfref</p>
-    <p>frerferferfref</p>
-    <p>frerferferfref</p>
-    <p>frerferferfref</p>
-    <p>frerferferfref</p>
-    <p>frerferferfref</p>
-    <p>frerferferfref</p>
-    <p>frerferferfref</p>
-    <p>frerferferfref</p>
-    <p>frerferferfref</p>
-    <p>frerferferfref</p>
-    <p>frerferferfref</p>
-    <p>frerferferfref</p>
-    <p>frerferferfref</p>
-    
-    <div style=" display: grid;grid-template-columns: repeat(2, 1fr);grid-template-rows: repeat(6, 100px);gap: 100px;grid-template-areas:'sidebar1 sidebar2';">
-        <div style="justify-self: self-end;">
-        <article style="grid-area: sidebar1;">
-            <h1 class="sticky1">11</h1>
-            <div  class="sticky2" >
-                <h3 style="float: left;">1...   </h3>
-                <a href="{% url 'content:page' %}"><button class="bt" onclick="cl(this.innerHTML)">kinetic theory of gases</button></a>
+    <div class="navbar">
+        <a href="{% url 'content:main' %}">home</a>     
+        <a href="{% url 'content:main' %}">Sigh</a>              
+    </div>  
+    <div class="main">
+        <div style="text-align: center; padding-top: 40px;">
+            <h1>Wlecome to the world of knoledge</h1>
+            <h4>make you future at a an iit or aiims</h4>
+            <div>
+                <h2>SIGN up and get started</h2>
+            </div>              
+        </div>    
+        <div style="margin-top: 390px;text-align: center;">
+            <h2>Browse Notes Now</h2>
+        </div> 
+        <div style=" display: grid;grid-template-columns: repeat(2, 1fr);grid-template-rows: repeat(6, 100px);gap: 100px;grid-template-areas:'sidebar1 sidebar2';">
+            <div style="justify-self: self-end;">
+            <article style="grid-area: sidebar1;">              
+                <h1 class="sticky1">11</h1>
+                <div  class="sticky2" >
+                    <h3 style="float: left;">1...   </h3>
+                    <a href="{% url 'content:page' %}"><button class="bt" onclick="cl(this.innerHTML)">Kinetic Theory of Gases</button></a>
+                </div>
+                <div  class="sticky1" >
+                    <h3 style="float: left;">2...   </h3>
+                    <a href="{% url 'content:page' %}"><button class="bt" onclick="cl(this.innerHTML)">heat and calorimatory</button></a>
+                </div>
+                <div  class="sticky2" >
+                    <h3 style="float: left;">3...   </h3>
+                    <a href="{% url 'content:page' %}"><button class="bt" onclick="cl(this.innerHTML)">Work,Energy and Power</button></a>
+                </div> 
+                <div  class="sticky1" >
+                    <h3 style="float: left;">3...   </h3>
+                    <a href="{% url 'content:page' %}"><button class="bt" onclick="cl(this.innerHTML)">System of Particles</button></a>
+                </div>                     
+            </article>
             </div>
-            <div  class="sticky1" >
-                <h3 style="float: left;">2...   </h3>
-                <a href="{% url 'content:page' %}"><button class="bt" onclick="cl(this.innerHTML)">heat and calorimatory</button></a>
+            <div >
+            <article style="grid-area: sidebar2;">
+                <p class="sticky1">12</p>
+                <div  class="sticky2" >
+                    <h3 style="float: left;">1...   </h3>
+                    <a href="{% url 'content:page' %}"><button class="bt" onclick="cl(this.innerHTML)">Electrostatics</button></a>
+                </div>
+                <div  class="sticky1" >
+                    <h3 style="float: left;">2...   </h3>
+                    <a href="{% url 'content:page' %}"><button class="bt" onclick="cl(this.innerHTML)">Laws of Motion</button></a>
+                </div>
+                <div  class="sticky2" >
+                    <h3 style="float: left;">3...   </h3>
+                    <a href="{% url 'content:page' %}"><button class="bt" onclick="cl(this.innerHTML)">Center of Mass and Momentum Conservation</button></a>
+                </div>   
+                <div  class="sticky1" >
+                    <h3 style="float: left;">3...   </h3>
+                    <a href="{% url 'content:page' %}"><button class="bt" onclick="cl(this.innerHTML)">Oscillation</button></a>
+                </div>                   
+            </article>              
             </div>
-            <div  class="sticky2" >
-                <h3 style="float: left;">3...   </h3>
-                <a href="{% url 'content:page' %}"><button class="bt" onclick="cl(this.innerHTML)">work and energy</button></a>
-            </div>      
-        </article>
         </div>
-        <div >
-        <article style="grid-area: sidebar2;">
-            <p class="sticky1">12</p>
-            <div  class="sticky2" >
-                <h3 style="float: left;">1...   </h3>
-                <a href="{% url 'content:page' %}"><button class="bt" onclick="cl(this.innerHTML)">electrostatics</button></a>
+        <div>
+            <div class="container">
+                <p>working hard forindias top institue . let us help you with best notes to prepare on</p>
+                <img sty alt="rwgr" src="../../static/content/Laws of Motion2.png" height="100px" width='100px'>
             </div>
-            <div  class="sticky1" >
-                <h3 style="float: left;">2...   </h3>
-                <a href="{% url 'content:page' %}"><button class="bt" onclick="cl(this.innerHTML)">electromagnetism</button></a>
-            </div>
-            <div  class="sticky2" >
-                <h3 style="float: left;">3...   </h3>
-                <a href="{% url 'content:page' %}"><button class="bt" onclick="cl(this.innerHTML)">magnetism and matter</button></a>
-            </div>         
-        </article>              
         </div>
-    </div>
-    
-    <div>
-        <div style="float: left;">f1</div>
-        <div style="width: 2px;align-self: stretch;background-color: black;"></div>
-    </div>
-
-    <p>
-        \[
-        n = \frac{m}{M}
-        \]
-        
-        \[
-        PV = \frac{m}{M} RT
-        \]
-        
-        \[
-        P = \frac{m}{VM} RT
-        \]
-        
-        \[
-        P = \frac{\rho RT}{M}
-        \]
-
-
-        <p id="ex">
-            This type of random motion is termed "Brownian Motion". We also assume that the distribution of speeds does not change in time, despite the collisions between molecules. That is, at any given moment, a certain percentage of molecules move at high speeds, a certain percentage move at low speeds, and so on.
-
-\begin{enumerate}
-    \setcounter{enumi}{6}
-    \item The gas under consideration is assumed to be a pure substance. That is, all of its molecules are identical.
-    \item The effect of gravity on gas molecules in a container is neglected. That is, in a container, we assume the density of gas is the same throughout its volume.
-    \item At all temperatures and pressures, all gases obey the ideal gas law which relates the microscopic characteristics of a gas, i.e., pressure, volume, and temperature. The ideal gas law is stated as:
-    \begin{equation}
-    PV = nRT
-    \end{equation}
-    Here, \( n \) is the number of moles of a gas and \( R \) is the universal gas constant. In the next sections of the chapter, we'll discuss the gas law in detail.
-
-    Generally, real gases obey the ideal gas law \( PV = nRT \) only at very high temperatures and very low pressures. At very high temperatures, the kinetic energy of the gas molecules is so high that even if some interaction between molecules is present, it will not contribute any energy. At very low pressures, the separation between molecules is very large, thus reducing their interaction. So, we can say that at high temperatures and low pressures, real gases behave like ideal gases.
-\end{enumerate}
-
-Boyle's Law states that the pressure exerted by a gas at constant temperature is inversely proportional to the volume in which it is enclosed. Thus, Boyle's law is written as:
-\begin{equation}
-PV = \text{constant}
-\end{equation}
-
-        </p>
-    </p>
-    <p>frerferferfref</p>
-    <p>frerferferfref</p>
-    <p>frerferferfref</p>
-    <p>frerferferfref</p>
-    <p>frerferferfref</p>
-    <p>frerferferfref</p>
-    <p>frerferferfref</p>
-    <p>frerferferfref</p>
-    <p>frerferferfref</p>
-    <p>frerferferfref</p>
-    <p>frerferferfref</p>
-    <p>frerferferfref</p>
-    <p>frerferferfref</p>
-    <p>frerferferfref</p>
-    <p>frerferferfref</p>
-    <p>frerferferfref</p>
-    <p>frerferferfref</p>
-    <p>frerferferfref</p>
-    <p>frerferferfref</p>
-    <p>frerferferfref</p>
-    <p>frerferferfref</p>
-    <p>frerferferfref</p>
-    <p>frerferferfref</p>
-    <p>frerferferfref</p>
-    <p>frerferferfref</p>
-    <p>frerferferfref</p>
-    <p>frerferferfref</p>
-    <p>frerferferfref</p>
-    <p>frerferferfref</p>
-    <p>frerferferfref</p>
-    <p>frerferferfref</p>
-    <p>frerferferfref</p>
-    <p>frerferferfref</p>
-    <p>frerferferfref</p>
-    <p>frerferferfref</p>
-    <p>frerferferfref</p>
-    <p>frerferferfref</p>
-    <p>frerferferfref</p>
-    <p>frerferferfref</p>
-    <p>frerferferfref</p>
-    <p>frerferferfref</p>
-    <p>frerferferfref</p>
-    <p>frerferferfref</p>
-
+        <div>enginering</div>
+        <div>
+            <h2>SIGN up and get started</h2>
+        </div>    
+    </div> 
 </body>
 
 <script>
