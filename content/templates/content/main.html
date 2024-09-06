@@ -11,23 +11,35 @@
     .sticky1{
   position: sticky;
   top: 30%;
-  background-color: rgb(157, 144, 231);
-  padding: 50px;
-  font-size: 20px;
-  rotate: 2deg;  
-  margin-bottom: 30px;
+  background-color: #5b0000;
+  padding: 4vw;
+  rotate: 3deg;  
+  margin-bottom: 2vw;
   z-index: 1;
+  font-size: 1vw;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;  
   }
   .sticky2{
   position: sticky;
   top: 30%;
-  background-color: rgb(157, 144, 238);
-  padding: 50px;
-  font-size: 20px;
-  rotate: -2deg;  
-  margin-bottom: 30px;
+  background-color: rgb(225, 3, 173);
+  padding: 4vw;
+  rotate: -3deg;  
+  margin-bottom: 2vw;
   z-index: 1;  
+  font-size: 1vw;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;  
   }
+
+
+  .bt{
+    border: none;
+    background-color: unset;
+    border-radius: 10px;
+    font-size: 2vw;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;  
+    color: seashell;
+}  
 article {
     text-align: center;
   background-image: linear-gradient(
@@ -40,12 +52,6 @@ article {
   z-index: 1;
   }
 
-.bt{
-    border: none;
-    font-size: 25px;
-    background-color: none;
-    border-radius: 10px;
-}
 .container {
             display: flex;
             align-items: center;
@@ -57,53 +63,77 @@ article {
 }
 .navbar {
     overflow: hidden;
-    background-color: #333;
+    background-color: azure;
     position: fixed; /* Set the navbar to fixed position */
     top: 0; /* Position the navbar at the top of the page */
+    left: 0;
     width: 100%; /* Full width */
-    z-index: 2;    
+    z-index: 3;
+    
+    box-shadow: 0 4px 10px #0000001a;
 }
 
 /* Links inside the navbar */
 .navbar a {
     float: left;
     display: block;
-    color: #f2f2f2;
+    color: #e62bf0;
     text-align: center;
-    padding: 14px 16px;
+    padding: 1.6%;
     text-decoration: none;
-    
+    font-size: 2vw;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;    
 }
 
 /* Change background on mouse-over */
 .navbar a:hover {
-    background: #ddd;
+    background: whitesmoke;
     color: black;
+    box-shadow: none;
 }
 
 /* Main content */
 .main {
     margin-top: 50px; /* Add a top margin to avoid content overlay */
 }
+.bg{
+    background-image: url("../../static/content/front.webp");
 
+/* Set a specific height */
+min-height: 700px; 
+max-width: 100%;
+
+/* Create the parallax scrolling effect */
+background-attachment: fixed;
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
+}
+/* Turn off parallax scrolling for tablets and phones. Increase the pixels if needed */
+@media only screen and (max-device-width: 1366px) {
+  .bg {
+    background-attachment: scroll;
+  }
+}
 </style>
-<body>
+<body style="background-color: whitesmoke;">
     <div class="navbar">
         <a href="{% url 'content:main' %}">home</a>     
-        <a href="{% url 'content:main' %}">Sigh</a>              
+        <a href="{% url 'register' %}">Sign Up</a>            
     </div>  
     <div class="main">
-        <div style="text-align: center; padding-top: 40px;">
-            <h1>Wlecome to the world of knoledge</h1>
-            <h4>make you future at a an iit or aiims</h4>
+        <div style="text-align: center;">
+            <div class="bg"></div>
+            <h1>Wlecome To </h1>
+            <h4>Make Your Future In Your Dream Institutions</h4>
             <div>
-                <h2>SIGN up and get started</h2>
+                <h2>Sign Up and get started</h2>
             </div>              
         </div>    
-        <div style="margin-top: 390px;text-align: center;">
+        <div style="margin-top: 90px;text-align: center;">
             <h2>Browse Notes Now</h2>
         </div> 
-        <div style=" display: grid;grid-template-columns: repeat(2, 1fr);grid-template-rows: repeat(6, 100px);gap: 100px;grid-template-areas:'sidebar1 sidebar2';">
+        <div style=" display: grid;grid-template-columns: repeat(2, 1fr);grid-template-rows: repeat(4, 9vw);gap: 8vw;grid-template-areas:'sidebar1 sidebar2';">
             <div style="justify-self: self-end;">
             <article style="grid-area: sidebar1;">              
                 <div  class="sticky2" >
@@ -134,7 +164,7 @@ article {
                     <h3 style="float: left;">6...   </h3>
                     <a href="{% url 'content:page' %}"><button class="bt" onclick="cl(this.innerHTML)">Laws of Motion</button></a>
                 </div>
-                <div  class="sticky2" style="font-size: 15px;">
+                <div  class="sticky2">
                     <h3 style="float: left;">7...   </h3>
                     <a href="{% url 'content:page' %}"><button class="bt" onclick="cl(this.innerHTML)">COM & Momentum Conservation</button></a>
                 </div>   
@@ -145,14 +175,9 @@ article {
             </article>              
             </div>
         </div>
-        <div>
-            <div class="container">
-                <p>working hard forindias top institue . let us help you with best notes to prepare on</p>
-                <img sty alt="rwgr" src="../../static/content/Laws of Motion2.png" height="100px" width='100px'>
-            </div>
-        </div>
-        <div>enginering</div>
+        <div class="bg" style="min-height: 400px;"></div>
         <div style="text-align: center;">
+            <h3>Loking for a place to practise questions, revise concepts Right Here!!</h3>
             <h2>SIGN up and get started</h2>
         </div>    
     </div>
@@ -177,7 +202,8 @@ article {
 		xhr.setRequestHeader('X-CSRFToken', '{{ csrf_token }}');  // Ensure CSRF token is included
 
 		// Send the request with the JSON data
-		xhr.send(JSON.stringify({ 'nam': val}));	
+		xhr.send(JSON.stringify({ 'nam': val}));
+        localStorage.setItem("name", val);        	
         } 
 
 </script>
