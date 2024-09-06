@@ -4,6 +4,36 @@
 
 <head>
     <style>
+.navbar {
+    overflow: hidden;
+    background-color: azure;
+    position: fixed; /* Set the navbar to fixed position */
+    top: 0; /* Position the navbar at the top of the page */
+    left: 0;
+    width: 100%; /* Full width */
+    z-index: 3;
+    
+    box-shadow: 0 4px 10px #0000001a;
+}
+
+/* Links inside the navbar */
+.navbar a {
+    float: left;
+    display: block;
+    color: #e62bf0;
+    text-align: center;
+    padding: 1.6%;
+    text-decoration: none;
+    font-size: 2vw;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;    
+}
+
+/* Change background on mouse-over */
+.navbar a:hover {
+    background: whitesmoke;
+    color: black;
+    box-shadow: none;
+}        
         /* Bordered form */
         form {
             border: 3px solid #f1f1f1;
@@ -74,6 +104,7 @@
         .container {
             padding: 16px;
             width: 610px;
+            margin-top: 4vw;
         }
 
         /* The "Forgot password" text */
